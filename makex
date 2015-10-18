@@ -1,0 +1,36 @@
+#!/bin/bash
+#CARCH="arm"
+#CHOST="arm-unknown-linux-gnueabi"
+#export PATH='/usr/local/x-tools/arm-unknown-linux-gnueabi/bin':${PATH}
+#export ARCH='arm'
+#export CROSS_COMPILE='arm-unknown-linux-gnueabi-'
+#-- Compiler and Linker Flags
+# -march (or -mcpu) builds exclusively for an architecture
+# -mtune optimizes for an architecture, but builds for whole processor family
+#CPPFLAGS="-D_FORTIFY_SOURCE=2"
+#CFLAGS="-march=armv5te -mtune=xscale -O2 -pipe -fstack-protector --param=ssp-buffer-size=4"
+#CXXFLAGS="-march=armv5te -mtune=xscale -O2 -pipe -fstack-protector --param=ssp-buffer-size=4"
+#LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro"
+#-- Make Flags: change this for DistCC/SMP systems
+#MAKEFLAGS="-j4"
+#-- Debugging flags
+#DEBUG_CFLAGS="-g -fvar-tracking-assignments"
+#DEBUG_CXXFLAGS="-g -fvar-tracking-assignments"
+#export PATH="/usr/lib/ccache/bin/:$PATH"
+#export DISTCC_HOSTS="--localslots=1 --localslots_cpp=1 10.10.20.30"
+#export CCACHE_DIR=/mnt/sd/ccache
+#make CC="ccache distcc" -j3 "$1"
+
+export ARCH=arm
+export PATH='/usr/local/x-tools2/arm-unknown-linux-gnueabi/bin':$PATH
+export CROSS_COMPILE=arm-unknown-linux-gnueabi-
+export STAGING_DIR=/usr/local/x-tools2/arm-unknown-linux-gnueabi
+export CC=arm-unknown-linux-gnueabi-gcc
+export LD=arm-unknown-linux-gnueabi-ld
+export TARGET=arm
+#export TARGET_ARCH=armel
+export HOSTCC=gcc
+
+
+make -j4 "$1"
+#gcc -v

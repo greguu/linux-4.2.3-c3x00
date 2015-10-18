@@ -60,6 +60,7 @@
 #include <linux/log2.h>
 #include <linux/slab.h>
 #include <linux/glob.h>
+#include <linux/leds.h>
 #include <scsi/scsi.h>
 #include <scsi/scsi_cmnd.h>
 #include <scsi/scsi_host.h>
@@ -4890,6 +4891,9 @@ static void ata_verify_xfer(struct ata_queued_cmd *qc)
 void ata_qc_complete(struct ata_queued_cmd *qc)
 {
 	struct ata_port *ap = qc->ap;
+	/* Trigger the LED (if available) */
+	ledtrig_disk_activity();
+	
 
 	/* XXX: New EH and old EH use different mechanisms to
 	 * synchronize EH with regular execution path.
